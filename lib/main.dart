@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:thread_clone/core/themes/theme.dart';
-import 'package:thread_clone/views/home.dart';
+import 'package:thread_clone/routes/route.dart';
+import 'package:thread_clone/routes/route_names.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,11 +13,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Thread',
       theme: theme,
-      home: const Home(),
+      getPages: Routes.pages,
+      initialRoute: RouteNames.home,
     );
   }
 }

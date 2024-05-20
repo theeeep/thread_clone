@@ -10,7 +10,7 @@ class Home extends StatelessWidget {
         title: const Text("Hello"),
       ),
       body: const Center(
-        child: Text("From Home"),
+        child: Text("Home"),
       ),
     );
   }
