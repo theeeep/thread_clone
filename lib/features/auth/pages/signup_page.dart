@@ -16,6 +16,7 @@ class _SignupPageState extends State<SignupPage> {
   final emailController = TextEditingController();
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
+  final cPasswordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -32,6 +33,7 @@ class _SignupPageState extends State<SignupPage> {
                 height: 60,
                 width: 60,
               ),
+              const SizedBox(height: 30),
               Align(
                 alignment: Alignment.topLeft,
                 child: Form(
@@ -45,7 +47,7 @@ class _SignupPageState extends State<SignupPage> {
                             fontSize: 25, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "Welcome Back",
+                        "Welcome to thread",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
@@ -71,6 +73,13 @@ class _SignupPageState extends State<SignupPage> {
                 label: "Password",
                 isObscureText: true,
                 controller: passwordController,
+              ),
+              const SizedBox(height: 22),
+              AuthField(
+                hintText: "Enter Confirm Password",
+                label: "Confirm Password",
+                isObscureText: true,
+                controller: cPasswordController,
               ),
               const SizedBox(height: 25),
               AuthGradientBtn(

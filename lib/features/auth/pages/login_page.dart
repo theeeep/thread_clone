@@ -31,6 +31,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 60,
                 width: 60,
               ),
+              const SizedBox(height: 30),
               Align(
                 alignment: Alignment.topLeft,
                 child: Form(

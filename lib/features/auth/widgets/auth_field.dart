@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thread_clone/core/themes/app_pallate.dart';
 
 class AuthField extends StatelessWidget {
   final String hintText, label;
@@ -18,10 +19,21 @@ class AuthField extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: const BorderSide(color: Colors.grey)),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: const BorderSide(color: AppPallete.greyColor),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: const BorderSide(color: AppPallete.gradient2),
+        ),
         hintText: hintText,
         label: Text(label),
+        labelStyle: const TextStyle(
+          color: AppPallete.gradient2,
+        ),
       ),
       validator: (value) {
         if (value!.isEmpty) {
