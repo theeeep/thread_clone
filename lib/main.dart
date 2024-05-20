@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thread_clone/core/themes/theme.dart';
 import 'package:thread_clone/views/home.dart';
 
 void main() {
@@ -13,10 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Thread',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: theme,
       home: const Home(),
     );
   }
