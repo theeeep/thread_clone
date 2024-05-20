@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:thread_clone/core/themes/app_pallate.dart';
+import 'package:thread_clone/features/auth/controllers/auth_controller.dart';
 import 'package:thread_clone/features/auth/widgets/auth_field.dart';
 import 'package:thread_clone/features/auth/widgets/auth_gradient_btn.dart';
 import 'package:thread_clone/routes/route_names.dart';
@@ -19,9 +20,15 @@ class _SignupPageState extends State<SignupPage> {
   final passwordController = TextEditingController();
   final cPasswordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  final authController = Get.put(AuthController());
 
   void submit() {
     if (formKey.currentState!.validate()) {
+      authController.signUp(
+        userNameController.text.trim(),
+        emailController.text.trim(),
+        passwordController.text.trim(),
+      );
       debugPrint("Good to go Chief 🫡");
     }
   }
@@ -107,10 +114,12 @@ class _SignupPageState extends State<SignupPage> {
                   },
                 ),
                 const SizedBox(height: 25),
-                AuthGradientBtn(
-                  btnText: "Sign Up",
-                  onPressed: submit,
-                ),
+                Obx(() => AuthGradientBtn(
+                      btnText: authController.signUpLoading.value
+                          ? "Processing..."
+                          : "Sign Up",
+                      onPressed: submit,
+                    )),
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () => Get.toNamed(RouteNames.logIn),
