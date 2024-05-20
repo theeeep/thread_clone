@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Thread',
-      theme: theme,
+      theme: AppTheme.theme,
       getPages: Routes.pages,
-      initialRoute: RouteNames.home,
+      initialRoute: RouteNames.logIn,
     );
   }
 }
