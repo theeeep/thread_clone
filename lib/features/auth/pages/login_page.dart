@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:get/route_manager.dart';
 import 'package:thread_clone/core/themes/app_pallate.dart';
 import 'package:thread_clone/features/auth/widgets/auth_field.dart';
@@ -17,6 +18,12 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
+  void submit() {
+    if (formKey.currentState!.validate()) {
+      debugPrint("Good to go Chief 🫡");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,19 +31,19 @@ class _LoginPageState extends State<LoginPage> {
           child: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Image.asset(
-                "assets/images/logo.png",
-                height: 60,
-                width: 60,
-              ),
-              const SizedBox(height: 30),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Form(
-                  key: formKey,
-                  child: const Column(
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                Image.asset(
+                  "assets/images/logo.png",
+                  height: 60,
+                  width: 60,
+                ),
+                const SizedBox(height: 30),
+                const Align(
+                  alignment: Alignment.topLeft,
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -52,47 +59,49 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              AuthField(
-                hintText: "Enter Email Id",
-                label: "Email Id",
-                controller: emailController,
-              ),
-              const SizedBox(height: 20),
-              AuthField(
-                hintText: "Enter Password",
-                label: "Password",
-                isObscureText: true,
-                controller: passwordController,
-              ),
-              const SizedBox(height: 25),
-              AuthGradientBtn(
-                btnText: "Log In",
-                onPressed: () {},
-              ),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () => Get.toNamed(RouteNames.signUp),
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Don\'t have an account ? ',
-                    style: Theme.of(context).textTheme.titleMedium,
-                    children: [
-                      TextSpan(
-                        text: ' Sign Up',
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: AppPallete.gradient2,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                ),
-                      ),
-                    ],
+                const SizedBox(height: 20),
+                AuthField(
+                  hintText: "Enter Email Id",
+                  label: "Email Id",
+                  controller: emailController,
+                  validatorCallback: ValidationBuilder().email().build(),
+                ),
+                const SizedBox(height: 20),
+                AuthField(
+                  hintText: "Enter Password",
+                  label: "Password",
+                  isObscureText: true,
+                  controller: passwordController,
+                  validatorCallback: ValidationBuilder().required().build(),
+                ),
+                const SizedBox(height: 25),
+                AuthGradientBtn(
+                  btnText: "Log In",
+                  onPressed: submit,
+                ),
+                const SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () => Get.toNamed(RouteNames.signUp),
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Don\'t have an account ? ',
+                      style: Theme.of(context).textTheme.titleMedium,
+                      children: [
+                        TextSpan(
+                          text: ' Sign Up',
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: AppPallete.gradient2,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       )),

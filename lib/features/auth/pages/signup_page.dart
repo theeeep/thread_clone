@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:get/route_manager.dart';
 import 'package:thread_clone/core/themes/app_pallate.dart';
 import 'package:thread_clone/features/auth/widgets/auth_field.dart';
@@ -18,6 +19,13 @@ class _SignupPageState extends State<SignupPage> {
   final passwordController = TextEditingController();
   final cPasswordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  void submit() {
+    if (formKey.currentState!.validate()) {
+      debugPrint("Good to go Chief 🫡");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,19 +34,19 @@ class _SignupPageState extends State<SignupPage> {
           child: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Image.asset(
-                "assets/images/logo.png",
-                height: 60,
-                width: 60,
-              ),
-              const SizedBox(height: 30),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Form(
-                  key: formKey,
-                  child: const Column(
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                Image.asset(
+                  "assets/images/logo.png",
+                  height: 60,
+                  width: 60,
+                ),
+                const SizedBox(height: 30),
+                const Align(
+                  alignment: Alignment.topLeft,
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -54,60 +62,78 @@ class _SignupPageState extends State<SignupPage> {
                     ],
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              AuthField(
-                hintText: "Enter User Name",
-                label: "User Name",
-                controller: userNameController,
-              ),
-              const SizedBox(height: 22),
-              AuthField(
-                hintText: "Enter Email Id",
-                label: "Email Id",
-                controller: emailController,
-              ),
-              const SizedBox(height: 22),
-              AuthField(
-                hintText: "Enter Password",
-                label: "Password",
-                isObscureText: true,
-                controller: passwordController,
-              ),
-              const SizedBox(height: 22),
-              AuthField(
-                hintText: "Enter Confirm Password",
-                label: "Confirm Password",
-                isObscureText: true,
-                controller: cPasswordController,
-              ),
-              const SizedBox(height: 25),
-              AuthGradientBtn(
-                btnText: "Sign Up",
-                onPressed: () {},
-              ),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () => Get.toNamed(RouteNames.logIn),
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Already have an account ? ',
-                    style: Theme.of(context).textTheme.titleMedium,
-                    children: [
-                      TextSpan(
-                        text: ' Sign In',
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: AppPallete.gradient2,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                ),
-                      ),
-                    ],
+                const SizedBox(height: 20),
+                AuthField(
+                  hintText: "Enter User Name",
+                  label: "User Name",
+                  controller: userNameController,
+                  validatorCallback: ValidationBuilder()
+                      .required()
+                      .minLength(6)
+                      .maxLength(20)
+                      .build(),
+                ),
+                const SizedBox(height: 22),
+                AuthField(
+                  hintText: "Enter Email Id",
+                  label: "Email Id",
+                  controller: emailController,
+                  validatorCallback:
+                      ValidationBuilder().required().email().build(),
+                ),
+                const SizedBox(height: 22),
+                AuthField(
+                  hintText: "Enter Password",
+                  label: "Password",
+                  isObscureText: true,
+                  controller: passwordController,
+                  validatorCallback: ValidationBuilder()
+                      .required()
+                      .minLength(6)
+                      .maxLength(20)
+                      .build(),
+                ),
+                const SizedBox(height: 22),
+                AuthField(
+                  hintText: "Enter Confirm Password",
+                  label: "Confirm Password",
+                  isObscureText: true,
+                  controller: cPasswordController,
+                  validatorCallback: (arg) {
+                    if (passwordController.text != arg) {
+                      return "Confirm Password Not Match! ";
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 25),
+                AuthGradientBtn(
+                  btnText: "Sign Up",
+                  onPressed: submit,
+                ),
+                const SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () => Get.toNamed(RouteNames.logIn),
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Already have an account ? ',
+                      style: Theme.of(context).textTheme.titleMedium,
+                      children: [
+                        TextSpan(
+                          text: ' Sign In',
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: AppPallete.gradient2,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       )),
