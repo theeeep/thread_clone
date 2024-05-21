@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:thread_clone/core/themes/app_pallate.dart';
@@ -65,4 +66,14 @@ Future<File?> pickImageFromGallery() async {
   if (file == null) return null;
   final dir = Directory.systemTemp;
   final targetPath = "${dir.absolute.path}/${uuid.v6()}.jpg";
+  File image = await compressImage(File(file.path), targetPath);
+  return image;
+}
+
+// * Compress image file
+Future<File> compressImage(File file, String targetPath) async {
+  var result = await FlutterImageCompress.compressAndGetFile(
+      file.path, targetPath,
+      quality: 70);
+  return File(result!.path);
 }
