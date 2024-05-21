@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thread_clone/core/themes/app_pallate.dart';
+import 'package:thread_clone/features/profile/widgets/btn_style.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -41,6 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Column(
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               SizedBox(
                                 width: context.width * 0.70,
                                 child: const Text(
-                                  "Build Build 🔨 🚀  jksdfnjksnjkdfndjrskfjkdrsjkfgjkdrbgfjsdkjgjdfbh",
+                                  "Build Build 🔨 🚀 ",
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
@@ -61,6 +63,31 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                             ],
+                          ),
+                          const CircleAvatar(
+                            radius: 40,
+                            backgroundImage:
+                                AssetImage("assets/images/avatar.png"),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: OutlinedButton(
+                              onPressed: () {},
+                              style: customOutlineBtnStyle(),
+                              child: const Text("Edit profile"),
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          Expanded(
+                            child: OutlinedButton(
+                              onPressed: () {},
+                              style: customOutlineBtnStyle(),
+                              child: const Text("Share profile"),
+                            ),
                           ),
                         ],
                       ),
