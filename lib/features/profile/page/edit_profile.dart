@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:thread_clone/core/themes/app_pallate.dart';
+import 'package:thread_clone/features/profile/controller/profile_controller.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -9,6 +11,7 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+  final profileController = Get.find<ProfileController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,12 +35,14 @@ class _EditProfileState extends State<EditProfile> {
               child: Stack(
                 alignment: Alignment.bottomRight,
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 80,
                     backgroundImage: AssetImage("assets/images/avatar.png"),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      profileController.pickImage();
+                    },
                     icon: const CircleAvatar(
                       radius: 18,
                       backgroundColor: AppPallete.gradient2,

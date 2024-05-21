@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thread_clone/core/themes/app_pallate.dart';
+import 'package:thread_clone/features/profile/controller/profile_controller.dart';
 import 'package:thread_clone/features/profile/widgets/btn_style.dart';
 import 'package:thread_clone/routes/route_names.dart';
 
@@ -12,6 +13,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final profileControllr = Get.put(ProfileController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
