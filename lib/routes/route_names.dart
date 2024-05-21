@@ -3,4 +3,5 @@ class RouteNames {
   static String home = "/";
   static String logIn = "/login";
   static String signUp = "/signup";
+  static String editProfile = "/editProfile";
 }

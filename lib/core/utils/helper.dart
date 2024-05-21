@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:thread_clone/core/themes/app_pallate.dart';
+import 'package:uuid/uuid.dart';
 
 void showSnackBar(String title, String message) {
   Get.showSnackbar(
@@ -51,4 +55,14 @@ void showSnackBar(String title, String message) {
       ),
     ),
   );
+}
+
+// * Pick image from gallery
+Future<File?> pickImageFromGallery() async {
+  const uuid = Uuid();
+  final picker = ImagePicker();
+  final XFile? file = await picker.pickImage(source: ImageSource.gallery);
+  if (file == null) return null;
+  final dir = Directory.systemTemp;
+  final targetPath = "${dir.absolute.path}/${uuid.v6()}.jpg";
 }

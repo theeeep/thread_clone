@@ -39,6 +39,9 @@ dependencies:
   form_validator: ^2.1.1
   flutter_dotenv: ^5.1.0
   supabase_flutter: ^2.5.3
+  image_picker: ^1.1.1
+  flutter_image_compress: ^2.3.0
+  uuid: ^4.4.0
 
 dev_dependencies:
   flutter_test:
