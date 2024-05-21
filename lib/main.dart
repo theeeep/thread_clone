@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.theme,
       getPages: Routes.pages,
       initialRoute: StorageService.userSession != null
-          ? RouteNames.home
+          ? RouteNames.btmNavBar
           : RouteNames.logIn,
     );
   }
