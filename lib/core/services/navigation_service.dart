@@ -8,7 +8,7 @@ import 'package:thread_clone/features/threads/page/add_thread.dart';
 
 class NavigationService extends GetxService {
   var currentIndex = 0.obs;
-  var lastIndex = 0.obs;
+  var prevIndex = 0.obs;
 
   // Page Lists
   List<Widget> pages() {
@@ -19,5 +19,11 @@ class NavigationService extends GetxService {
       const NotificationPage(),
       const ProfilePage(),
     ];
+  }
+
+  // * Update currentIndex
+  void updateIndex(int index) {
+    prevIndex.value = currentIndex.value;
+    currentIndex.value = index;
   }
 }

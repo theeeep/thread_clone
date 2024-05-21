@@ -15,7 +15,7 @@ class _SearchPageState extends State<SearchPage> {
         title: const Text("Hello"),
       ),
       body: const Center(
-        child: Text("Home"),
+        child: Text("Search"),
       ),
     );
   }
