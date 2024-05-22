@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:thread_clone/core/themes/app_pallate.dart';
 import 'package:thread_clone/core/utils/env.dart';
+import 'package:thread_clone/features/profile_setting/widgets/dialog_box.dart';
 import 'package:uuid/uuid.dart';
 
 void showSnackBar(String title, String message) {
@@ -82,4 +83,15 @@ Future<File> compressImage(File file, String targetPath) async {
 // * get s3Bucket url
 String getS3Url(String path) {
   return "${ENV.supabaseUrl}/storage/v1/object/public/$path";
+}
+
+// * Confirm Dialog
+void confirmDialog(String title, String subTitle, VoidCallback callback) {
+  Get.dialog(
+    DialogBox(
+      title: title,
+      subTitle: subTitle,
+      callback: callback,
+    ),
+  );
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:thread_clone/core/themes/app_pallate.dart';
+import 'package:thread_clone/features/auth/controllers/auth_controller.dart';
 import 'package:thread_clone/features/auth/widgets/auth_field.dart';
 import 'package:thread_clone/features/auth/widgets/auth_gradient_btn.dart';
 import 'package:thread_clone/routes/route_names.dart';
@@ -17,9 +19,14 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  final authController = Get.put(AuthController());
 
-  void submit() {
+  void logInFunc() {
     if (formKey.currentState!.validate()) {
+      authController.logIn(
+        emailController.text.trim(),
+        passwordController.text.trim(),
+      );
       debugPrint("Good to go Chief 🫡");
     }
   }
@@ -84,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 25),
                 AuthGradientBtn(
                   btnText: "Log In",
-                  onPressed: submit,
+                  onPressed: logInFunc,
                 ),
                 const SizedBox(height: 20),
                 GestureDetector(

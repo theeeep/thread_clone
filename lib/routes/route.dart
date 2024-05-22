@@ -32,7 +32,7 @@ class Routes {
     ),
     GetPage(
       name: RouteNames.profileSetting,
-      page: () => const Setting(),
+      page: () => Setting(),
       transition: Transition.rightToLeftWithFade,
     ),
   ];

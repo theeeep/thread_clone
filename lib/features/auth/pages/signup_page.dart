@@ -22,7 +22,7 @@ class _SignupPageState extends State<SignupPage> {
   final formKey = GlobalKey<FormState>();
   final authController = Get.put(AuthController());
 
-  void submit() {
+  void signUpFunc() {
     if (formKey.currentState!.validate()) {
       authController.signUp(
         userNameController.text.trim(),
@@ -128,7 +128,7 @@ class _SignupPageState extends State<SignupPage> {
                       btnText: authController.signUpLoading.value
                           ? "Processing..."
                           : "Sign Up",
-                      onPressed: submit,
+                      onPressed: signUpFunc,
                     ),
                   ),
                   const SizedBox(height: 20),
