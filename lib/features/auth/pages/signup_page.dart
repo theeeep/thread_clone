@@ -33,119 +33,133 @@ class _SignupPageState extends State<SignupPage> {
     }
   }
 
+  // @override
+  // void dispose() {
+  //   emailController.dispose();
+  //   userNameController.dispose();
+  //   passwordController.dispose();
+  //   cPasswordController.dispose();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-          child: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(10),
-          child: Form(
-            key: formKey,
-            child: Column(
-              children: [
-                Image.asset(
-                  "assets/images/logo.png",
-                  height: 60,
-                  width: 60,
-                ),
-                const SizedBox(height: 30),
-                const Align(
-                  alignment: Alignment.topLeft,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Sign Up",
-                        style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "Welcome to thread",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                    ],
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(10),
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  Image.asset(
+                    "assets/images/logo.png",
+                    height: 60,
+                    width: 60,
                   ),
-                ),
-                const SizedBox(height: 20),
-                AuthField(
-                  hintText: "Enter User Name",
-                  label: "User Name",
-                  controller: userNameController,
-                  validatorCallback: ValidationBuilder()
-                      .required()
-                      .minLength(6)
-                      .maxLength(20)
-                      .build(),
-                ),
-                const SizedBox(height: 22),
-                AuthField(
-                  hintText: "Enter Email Id",
-                  label: "Email Id",
-                  controller: emailController,
-                  validatorCallback:
-                      ValidationBuilder().required().email().build(),
-                ),
-                const SizedBox(height: 22),
-                AuthField(
-                  hintText: "Enter Password",
-                  label: "Password",
-                  isObscureText: true,
-                  controller: passwordController,
-                  validatorCallback: ValidationBuilder()
-                      .required()
-                      .minLength(6)
-                      .maxLength(20)
-                      .build(),
-                ),
-                const SizedBox(height: 22),
-                AuthField(
-                  hintText: "Enter Confirm Password",
-                  label: "Confirm Password",
-                  isObscureText: true,
-                  controller: cPasswordController,
-                  validatorCallback: (arg) {
-                    if (passwordController.text != arg) {
-                      return "Confirm Password Not Match! ";
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 25),
-                Obx(() => AuthGradientBtn(
-                      btnText: authController.signUpLoading.value
-                          ? "Processing..."
-                          : "Sign Up",
-                      onPressed: submit,
-                    )),
-                const SizedBox(height: 20),
-                GestureDetector(
-                  onTap: () => Get.toNamed(RouteNames.logIn),
-                  child: RichText(
-                    text: TextSpan(
-                      text: 'Already have an account ? ',
-                      style: Theme.of(context).textTheme.titleMedium,
+                  const SizedBox(height: 30),
+                  const Align(
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextSpan(
-                          text: ' Sign In',
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: AppPallete.gradient2,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
+                        Text(
+                          "Sign Up",
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "Welcome to thread",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 20),
+                  AuthField(
+                    hintText: "Enter User Name",
+                    label: "User Name",
+                    controller: userNameController,
+                    validatorCallback: ValidationBuilder()
+                        .required()
+                        .minLength(6)
+                        .maxLength(20)
+                        .build(),
+                  ),
+                  const SizedBox(height: 22),
+                  AuthField(
+                    hintText: "Enter Email Id",
+                    label: "Email Id",
+                    controller: emailController,
+                    validatorCallback:
+                        ValidationBuilder().required().email().build(),
+                  ),
+                  const SizedBox(height: 22),
+                  AuthField(
+                    hintText: "Enter Password",
+                    label: "Password",
+                    isObscureText: true,
+                    controller: passwordController,
+                    validatorCallback: ValidationBuilder()
+                        .required()
+                        .minLength(6)
+                        .maxLength(20)
+                        .build(),
+                  ),
+                  const SizedBox(height: 22),
+                  AuthField(
+                    hintText: "Enter Confirm Password",
+                    label: "Confirm Password",
+                    isObscureText: true,
+                    controller: cPasswordController,
+                    validatorCallback: (arg) {
+                      if (passwordController.text != arg) {
+                        return "Confirm Password Not Match! ";
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 25),
+                  Obx(
+                    () => AuthGradientBtn(
+                      btnText: authController.signUpLoading.value
+                          ? "Processing..."
+                          : "Sign Up",
+                      onPressed: submit,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () => Get.toNamed(RouteNames.logIn),
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'Already have an account ? ',
+                        style: Theme.of(context).textTheme.titleMedium,
+                        children: [
+                          TextSpan(
+                            text: ' Sign In',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(
+                                  color: AppPallete.gradient2,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      )),
+      ),
     );
   }
 }
