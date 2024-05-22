@@ -28,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
         centerTitle: false,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => Get.toNamed(RouteNames.profileSetting),
             icon: const ImageIcon(
               AssetImage('assets/icons/Text_Align.png'),
             ),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:thread_clone/core/utils/helper.dart';
 
 class CircleAvatarDp extends StatelessWidget {
   final double radius;
@@ -12,14 +13,14 @@ class CircleAvatarDp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (url != null)
-          CircleAvatar(
-            backgroundImage: NetworkImage(url!),
-            radius: radius,
-          )
-        else if (file != null)
+        if (file != null)
           CircleAvatar(
             backgroundImage: FileImage(file!),
+            radius: radius,
+          )
+        else if (url != null)
+          CircleAvatar(
+            backgroundImage: NetworkImage(getS3Url(url!)),
             radius: radius,
           )
         else

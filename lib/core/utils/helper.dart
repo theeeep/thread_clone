@@ -5,6 +5,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:thread_clone/core/themes/app_pallate.dart';
+import 'package:thread_clone/core/utils/env.dart';
 import 'package:uuid/uuid.dart';
 
 void showSnackBar(String title, String message) {
@@ -76,4 +77,9 @@ Future<File> compressImage(File file, String targetPath) async {
       file.path, targetPath,
       quality: 70);
   return File(result!.path);
+}
+
+// * get s3Bucket url
+String getS3Url(String path) {
+  return "${ENV.supabaseUrl}/storage/v1/object/public/$path";
 }

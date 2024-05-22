@@ -4,4 +4,5 @@ class RouteNames {
   static String logIn = "/login";
   static String signUp = "/signup";
   static String editProfile = "/editProfile";
+  static String profileSetting = "/profileSetting";
 }

@@ -3,6 +3,7 @@ import 'package:thread_clone/features/auth/pages/login_page.dart';
 import 'package:thread_clone/features/auth/pages/signup_page.dart';
 import 'package:thread_clone/features/btmnavbar.dart';
 import 'package:thread_clone/features/profile/page/edit_profile.dart';
+import 'package:thread_clone/features/profile_setting/page/setting.dart';
 import 'package:thread_clone/routes/route_names.dart';
 import 'package:thread_clone/features/home/page/home_page.dart';
 
@@ -28,6 +29,11 @@ class Routes {
       name: RouteNames.editProfile,
       page: () => const EditProfile(),
       transition: Transition.leftToRight,
+    ),
+    GetPage(
+      name: RouteNames.profileSetting,
+      page: () => const Setting(),
+      transition: Transition.rightToLeftWithFade,
     ),
   ];
 }
