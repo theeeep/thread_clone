@@ -18,13 +18,17 @@ class SupabaseService extends GetxService {
 
   // * Listen Auth Changes
   void listenAuthChanges() {
-    supabaseClient.auth.onAuthStateChange.listen((data) {
-      final AuthChangeEvent event = data.event;
+    supabaseClient.auth.onAuthStateChange.listen(
+      (data) {
+        final AuthChangeEvent event = data.event;
 
-      if (event == AuthChangeEvent.userUpdated) {
-        debugPrint("Inside the user updated session $data");
-        currentUser.value = data.session?.user;
-      }
-    });
+        if (event == AuthChangeEvent.userUpdated) {
+          debugPrint("Inside the user updated session $data");
+          currentUser.value = data.session?.user;
+        } else if (event == AuthChangeEvent.signedIn) {
+          currentUser.value = data.session?.user;
+        }
+      },
+    );
   }
 }
