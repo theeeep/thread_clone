@@ -13,9 +13,9 @@ class NavigationService extends GetxService {
   // Page Lists
   List<Widget> pages() {
     return [
-      const HomePage(),
+      HomePage(),
       const SearchPage(),
-      AddThread(),
+      const AddThread(),
       const NotificationPage(),
       const ProfilePage(),
     ];

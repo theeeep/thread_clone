@@ -12,7 +12,7 @@ class Routes {
     GetPage(name: RouteNames.btmNavBar, page: () => Btmnavbar()),
     GetPage(
       name: RouteNames.home,
-      page: () => const HomePage(),
+      page: () => HomePage(),
       transition: Transition.circularReveal,
     ),
     GetPage(
