@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:thread_clone/features/home/model/post_model.dart';
+import 'package:thread_clone/routes/route_names.dart';
 
 class PostBottomBar extends StatelessWidget {
   final PostModel post;
@@ -22,7 +24,9 @@ class PostBottomBar extends StatelessWidget {
           style: const TextStyle(fontSize: 18),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed(RouteNames.commentPage, arguments: post);
+          },
           icon: const ImageIcon(
             AssetImage("assets/icons/comment.png"),
             size: 28,
