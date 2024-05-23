@@ -44,7 +44,7 @@ class _AddThreadState extends State<AddThread> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const AddThreadAppbar(),
+              AddThreadAppbar(),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,

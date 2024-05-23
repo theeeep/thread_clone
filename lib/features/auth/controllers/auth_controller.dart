@@ -61,7 +61,8 @@ class AuthController extends GetxController {
       showSnackBar("Authentication Error", e.message);
     } catch (error) {
       logInLoading.value = false;
-      debugPrint("Auth Controller Error: $error");
+      debugPrint(
+          "Auth Controller Error: Something went wrong. Please try again.r");
       showSnackBar("Error", "Something went wrong. Please try again.");
     }
   }
