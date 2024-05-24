@@ -64,6 +64,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                 .notificationList[index].createdAt!),
                             style: const TextStyle(
                               fontWeight: FontWeight.w600,
+                              fontSize: 12,
                               letterSpacing: 1.5,
                               color: AppPallete.gradient3,
                             ),

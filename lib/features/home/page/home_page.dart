@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:thread_clone/core/themes/app_pallate.dart';
 import 'package:thread_clone/features/home/controller/home_controller.dart';
 import 'package:thread_clone/features/home/widgets/loading_widget.dart';
 import 'package:thread_clone/features/home/widgets/post_card.dart';
@@ -15,6 +16,7 @@ class HomePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: RefreshIndicator(
+          color: AppPallete.gradient2,
           onRefresh: () => homeController.fetchThreads(),
           child: CustomScrollView(
             slivers: [

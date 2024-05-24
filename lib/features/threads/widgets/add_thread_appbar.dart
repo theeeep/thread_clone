@@ -31,7 +31,7 @@ class AddThreadAppbar extends StatelessWidget {
                 },
                 icon: const Icon(Icons.close),
               ),
-              const SizedBox(width: 20),
+              const SizedBox(width: 100),
               const Text(
                 "Add Thread",
                 style: TextStyle(fontSize: 20),
