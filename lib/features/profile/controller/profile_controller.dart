@@ -6,10 +6,13 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:thread_clone/core/services/supabase_service.dart';
 import 'package:thread_clone/core/utils/env.dart';
 import 'package:thread_clone/core/utils/helper.dart';
+import 'package:thread_clone/features/home/model/post_model.dart';
 
 class ProfileController extends GetxController {
   var loading = false.obs;
+  var postLoading = false.obs;
   Rx<File?> image = Rx<File?>(null);
+  RxList<PostModel> posts = RxList<PostModel>();
 
   // * Update Profile Pic
   Future<void> updateProfile(String userId, String description) async {
@@ -59,4 +62,28 @@ class ProfileController extends GetxController {
     File? file = await pickImageFromGallery();
     if (file != null) image.value = file;
   }
+
+  // * Fetch Post
+  void fetchUserThreads(String userId) async {
+    try {
+      postLoading.value = true;
+      final List<dynamic> response =
+          await SupabaseService.supabaseClient.from("threads").select('''
+    id,content, image, created_at, comment_count, like_count, user_id, 
+    user:user_id (email, metadata)
+''').eq("use_id", userId).order("id", ascending: false);
+      postLoading.value = false;
+      debugPrint("Fetch Successfully: $response");
+    } catch (e) {
+      postLoading.value = false;
+      showSnackBar("Error", "Fetch Threads Error");
+    }
+  }
+
+  // * Fetch Replies
+//   void fetchReplies(String userId) async {
+//     final List<dynamic> response =
+//         await SupabaseService.supabaseClient.from("comments").select('''
+// ''');
+//   }
 }
