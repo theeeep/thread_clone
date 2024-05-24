@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thread_clone/core/themes/app_pallate.dart';
 
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({super.key});
@@ -8,7 +9,9 @@ class LoadingWidget extends StatelessWidget {
     return const Center(
       child: Padding(
         padding: EdgeInsets.only(top: 20),
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(
+          color: AppPallete.gradient2,
+        ),
       ),
     );
   }
