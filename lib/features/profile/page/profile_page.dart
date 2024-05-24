@@ -15,8 +15,17 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final profileControllr = Get.put(ProfileController());
+  final profileController = Get.put(ProfileController());
   final supabaseService = Get.find<SupabaseService>();
+
+  @override
+  void initState() {
+    if (supabaseService.currentUser.value?.id != null) {
+      profileController.fetchUserThreads(supabaseService.currentUser.value!.id);
+      profileController.fetchReplies(supabaseService.currentUser.value!.id);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
