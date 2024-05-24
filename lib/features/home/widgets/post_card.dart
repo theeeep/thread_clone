@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thread_clone/core/themes/app_pallate.dart';
+import 'package:thread_clone/core/utils/helper.dart';
 import 'package:thread_clone/features/home/model/post_model.dart';
 import 'package:thread_clone/features/home/widgets/post_bottom_bar.dart';
 import 'package:thread_clone/features/home/widgets/post_card_image.dart';
@@ -34,9 +35,9 @@ class PostCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     PostTopBar(post: post),
-                    const Text(
-                      "2 hrs ago",
-                      style: TextStyle(color: AppPallete.greyColor),
+                    Text(
+                      formatDate(post.createdAt!),
+                      style: const TextStyle(color: AppPallete.greyColor),
                     ),
                     const SizedBox(height: 10),
                     Text(

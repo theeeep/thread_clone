@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thread_clone/core/services/navigation_service.dart';
 import 'package:thread_clone/core/services/supabase_service.dart';
+import 'package:thread_clone/core/themes/app_pallate.dart';
+import 'package:thread_clone/core/utils/helper.dart';
 import 'package:thread_clone/features/home/widgets/loading_widget.dart';
 import 'package:thread_clone/features/notification/controller/notification_controller.dart';
 import 'package:thread_clone/features/profile/widgets/circle_avatar_dp.dart';
@@ -58,12 +60,20 @@ class _NotificationPageState extends State<NotificationPage> {
                                 .notificationList[index].user!.metadata!.name!,
                           ),
                           trailing: Text(
-                            notificationController
-                                .notificationList[index].createdAt!,
+                            formatDate(notificationController
+                                .notificationList[index].createdAt!),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1.5,
+                              color: AppPallete.gradient3,
+                            ),
                           ),
                           subtitle: Text(
                             notificationController
                                 .notificationList[index].notification!,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
                           ),
                         ),
                       )

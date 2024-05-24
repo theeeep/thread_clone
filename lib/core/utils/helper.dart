@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:thread_clone/core/themes/app_pallate.dart';
 import 'package:thread_clone/core/utils/env.dart';
 import 'package:thread_clone/features/profile_setting/widgets/dialog_box.dart';
@@ -94,4 +95,16 @@ void confirmDialog(String title, String subTitle, VoidCallback callback) {
       callback: callback,
     ),
   );
+}
+
+// * Formate Date
+String formatDate(String date) {
+  // Parse UTC timestamp to DateTime
+  DateTime utcDateTime = DateTime.parse(date.split("+")[0].trim());
+
+  // Parse UTC timestamp to DateTime
+  DateTime istDateTime = utcDateTime.add(const Duration(hours: 5, minutes: 30));
+
+  // Format Date
+  return Jiffy.parseFromDateTime(istDateTime).fromNow();
 }
