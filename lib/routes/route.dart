@@ -5,6 +5,7 @@ import 'package:thread_clone/features/btmnavbar.dart';
 import 'package:thread_clone/features/comments/pages/add_comment.dart';
 import 'package:thread_clone/features/profile/page/edit_profile.dart';
 import 'package:thread_clone/features/profile_setting/page/setting.dart';
+import 'package:thread_clone/features/threads/page/show_threads.dart';
 import 'package:thread_clone/routes/route_names.dart';
 import 'package:thread_clone/features/home/page/home_page.dart';
 
@@ -37,9 +38,14 @@ class Routes {
       transition: Transition.rightToLeftWithFade,
     ),
     GetPage(
-      name: RouteNames.commentPage,
+      name: RouteNames.addcommentPage,
       page: () => AddComment(),
       transition: Transition.downToUp,
+    ),
+    GetPage(
+      name: RouteNames.showSingleThread,
+      page: () => const ShowThreads(),
+      transition: Transition.zoom,
     ),
   ];
 }

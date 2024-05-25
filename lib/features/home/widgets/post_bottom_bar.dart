@@ -25,7 +25,7 @@ class PostBottomBar extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
-            Get.toNamed(RouteNames.commentPage, arguments: post);
+            Get.toNamed(RouteNames.addcommentPage, arguments: post);
           },
           icon: const ImageIcon(
             AssetImage("assets/icons/comment.png"),

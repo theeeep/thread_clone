@@ -71,12 +71,12 @@ class ThreadController extends GetxController {
   }
 
   //* Show single thread by id
-  void showSingleThread(int threadId) async {
+  void fetchSingleThread(int threadId) async {
     try {
       showThreadLoading.value = true;
       final response =
           await SupabaseService.supabaseClient.from("threads").select('''
-    id,content, image, created_at, comment_count, like_count, user_id, 
+    id, content, image, created_at, comment_count, like_count, user_id, 
     user:user_id (email, metadata)
 ''').eq("id", threadId).single();
 
@@ -101,15 +101,17 @@ class ThreadController extends GetxController {
   id, user_id, thread_id, reply, created_at, user:user_id(email, metadata)
 ''').eq("thread_id", threadId);
 
-      showCommentLoading.value = true;
+      showCommentLoading.value = false;
 
       if (response.isNotEmpty) {
         comments.value = [
           for (var item in response) CommentModel.fromJson(item)
         ];
       }
+      showCommentLoading.value = false;
     } catch (e) {
       showCommentLoading.value = false;
+      showSnackBar("Error", "Something went wrong!");
     }
   }
 

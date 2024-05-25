@@ -7,6 +7,7 @@ import 'package:thread_clone/features/home/widgets/post_bottom_bar.dart';
 import 'package:thread_clone/features/home/widgets/post_card_image.dart';
 import 'package:thread_clone/features/home/widgets/post_top_bar.dart';
 import 'package:thread_clone/features/profile/widgets/circle_avatar_dp.dart';
+import 'package:thread_clone/routes/route_names.dart';
 
 class PostCard extends StatelessWidget {
   final PostModel post;
@@ -40,10 +41,16 @@ class PostCard extends StatelessWidget {
                       style: const TextStyle(color: AppPallete.greyColor),
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                      post.content!,
-                      style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.w500),
+                    GestureDetector(
+                      onTap: () => {
+                        Get.toNamed(RouteNames.showSingleThread,
+                            arguments: post.id),
+                      },
+                      child: Text(
+                        post.content!,
+                        style: const TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w500),
+                      ),
                     ),
                     const SizedBox(height: 10),
                     if (post.image != null) PostCardImage(url: post.image!),
