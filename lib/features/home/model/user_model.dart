@@ -1,11 +1,13 @@
 class User {
   String? email;
+  String? created_at;
   Metadata? metadata;
 
-  User({this.email, this.metadata});
+  User({this.email, this.metadata, this.created_at});
 
   User.fromJson(Map<String, dynamic> json) {
     email = json['email'];
+    created_at = json['created_at'];
     metadata =
         json['metadata'] != null ? Metadata.fromJson(json['metadata']) : null;
   }
@@ -13,6 +15,7 @@ class User {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['email'] = email;
+    data['created_at'] = created_at;
     if (metadata != null) {
       data['metadata'] = metadata!.toJson();
     }
