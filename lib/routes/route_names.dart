@@ -7,4 +7,5 @@ class RouteNames {
   static String profileSetting = "/profileSetting";
   static String addcommentPage = "/addcommentPage";
   static String showSingleThread = "/showSingleThread";
+  static String tapToShowImage = "/tapToShowImage";
 }
