@@ -29,26 +29,34 @@ class _ShowThreadsState extends State<ShowThreads> {
         title: const Text("Thread"),
         centerTitle: true,
       ),
-      body: Obx(() => threadController.showThreadLoading.value
+      body: Obx(() => threadController.fetchThreadLoading.value
           ? const LoadingWidget()
           : SingleChildScrollView(
-              padding: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               child: Column(
                 children: [
                   PostCard(post: threadController.posts.value),
                   const SizedBox(height: 20),
 
                   // Load thread replies
-                  if (threadController.showCommentLoading.value)
+                  if (threadController.fetchCommentLoading.value)
                     const LoadingWidget()
                   else if (threadController.comments.isNotEmpty)
                     ListView.builder(
                       itemCount: threadController.comments.length,
                       shrinkWrap: true,
                       physics: const BouncingScrollPhysics(),
-                      itemBuilder: (context, index) => CommentCardTopBar(
-                        comment: threadController.comments[index],
+                      // TODO: Fix Comment Card with profile pic
+                      itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CommentCardTopBar(
+                          comment: threadController.comments[index],
+                        ),
                       ),
+                    )
+                  else
+                    const Center(
+                      child: Text("No Reply"),
                     ),
                 ],
               ),

@@ -16,9 +16,9 @@ class ThreadController extends GetxController {
   var content = "".obs;
   var loading = false.obs;
   Rx<File?> image = Rx<File?>(null);
-  var showThreadLoading = false.obs;
+  var fetchThreadLoading = false.obs;
   Rx<PostModel> posts = Rx<PostModel>(PostModel());
-  var showCommentLoading = false.obs;
+  var fetchCommentLoading = false.obs;
   RxList<CommentModel> comments = RxList<CommentModel>();
 
   void pickImage() async {
@@ -73,21 +73,26 @@ class ThreadController extends GetxController {
   //* Show single thread by id
   void fetchSingleThread(int threadId) async {
     try {
-      showThreadLoading.value = true;
+      posts.value = PostModel();
+
+      comments.value = [];
+
+      fetchThreadLoading.value = true;
+
       final response =
           await SupabaseService.supabaseClient.from("threads").select('''
     id, content, image, created_at, comment_count, like_count, user_id, 
     user:user_id (email, metadata)
 ''').eq("id", threadId).single();
 
-      showThreadLoading.value = false;
+      fetchThreadLoading.value = false;
 
       posts.value = PostModel.fromJson(response);
 
       // Fetch fetchSingleComment
       fetchSingleComment(threadId);
     } catch (e) {
-      showThreadLoading.value = false;
+      fetchThreadLoading.value = false;
       showSnackBar("Error", "Something went wrong!");
     }
   }
@@ -95,22 +100,25 @@ class ThreadController extends GetxController {
   //* Show comments of single thread by id
   void fetchSingleComment(int threadId) async {
     try {
-      showCommentLoading.value = true;
+      fetchCommentLoading.value = true;
+
       final List<dynamic> response =
           await SupabaseService.supabaseClient.from("comments").select('''
   id, user_id, thread_id, reply, created_at, user:user_id(email, metadata)
 ''').eq("thread_id", threadId);
 
-      showCommentLoading.value = false;
+      fetchCommentLoading.value = false;
 
       if (response.isNotEmpty) {
         comments.value = [
           for (var item in response) CommentModel.fromJson(item)
         ];
       }
-      showCommentLoading.value = false;
+
+      fetchCommentLoading.value = false;
     } catch (e) {
-      showCommentLoading.value = false;
+      fetchCommentLoading.value = false;
+
       showSnackBar("Error", "Something went wrong!");
     }
   }
