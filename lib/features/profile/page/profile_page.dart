@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thread_clone/core/services/supabase_service.dart';
 import 'package:thread_clone/core/themes/app_pallate.dart';
+import 'package:thread_clone/features/home/widgets/loading_widget.dart';
+import 'package:thread_clone/features/home/widgets/post_card.dart';
 import 'package:thread_clone/features/profile/controller/profile_controller.dart';
 import 'package:thread_clone/features/profile/widgets/btn_style.dart';
 import 'package:thread_clone/features/profile/widgets/circle_avatar_dp.dart';
+import 'package:thread_clone/features/profile/widgets/profile_comment_card.dart';
 import 'package:thread_clone/routes/route_names.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -124,6 +127,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 delegate: SliverAppBarDelegate(
                   const TabBar(
                     indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorColor: AppPallete.gradient2,
+                    labelColor: AppPallete.gradient2,
                     tabs: [
                       Tab(text: "Threads"),
                       Tab(text: "Replies"),
@@ -133,10 +138,55 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ];
           },
-          body: const TabBarView(
+          body: TabBarView(
             children: [
-              Text("I'm Threads"),
-              Text("I'm Replies"),
+              Obx(
+                () => SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 10),
+                      if (profileController.postLoading.value)
+                        const LoadingWidget()
+                      else if (profileController.posts.isNotEmpty)
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: profileController.posts.length,
+                          itemBuilder: (context, index) => PostCard(
+                            post: profileController.posts[index],
+                          ),
+                        )
+                      else
+                        const Center(
+                          child: Text("No Data Found"),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+              Obx(() => SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 10),
+                        if (profileController.commentLoading.value)
+                          const LoadingWidget()
+                        else if (profileController.comments.isNotEmpty)
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: profileController.comments.length,
+                            itemBuilder: (context, index) => ProfileCommentCard(
+                              comment: profileController.comments[index],
+                            ),
+                          )
+                        else
+                          const Center(
+                            child: Text("No Data Found"),
+                          ),
+                      ],
+                    ),
+                  )),
             ],
           ),
         ),
