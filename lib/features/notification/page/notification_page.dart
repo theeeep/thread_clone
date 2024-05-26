@@ -7,6 +7,7 @@ import 'package:thread_clone/core/utils/helper.dart';
 import 'package:thread_clone/features/home/widgets/loading_widget.dart';
 import 'package:thread_clone/features/notification/controller/notification_controller.dart';
 import 'package:thread_clone/features/profile/widgets/circle_avatar_dp.dart';
+import 'package:thread_clone/routes/route_names.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -50,6 +51,11 @@ class _NotificationPageState extends State<NotificationPage> {
                         itemCount:
                             notificationController.notificationList.length,
                         itemBuilder: (context, index) => ListTile(
+                          onTap: () => {
+                            Get.toNamed(RouteNames.showSingleThread,
+                                arguments: notificationController
+                                    .notificationList[index].threadId)
+                          },
                           leading: CircleAvatarDp(
                             radius: 25,
                             url: notificationController

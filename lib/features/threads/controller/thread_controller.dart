@@ -130,6 +130,39 @@ class ThreadController extends GetxController {
     image.value = null;
   }
 
+  // * Like Dislike
+  Future<void> likeDislike(
+      String status, int threadId, String threadUserId, String userId) async {
+    if (status == "1") {
+      await SupabaseService.supabaseClient.from("likes").insert({
+        "user_id": userId,
+        "thread_id": threadId,
+      });
+
+      // * Add like notifications
+      await SupabaseService.supabaseClient.from("notifications").insert({
+        "user_id": userId,
+        "notification": "Someone like your thread",
+        "to_user_id": threadUserId,
+        "thread_id": threadId,
+      });
+
+      // * Increment like counter
+      await SupabaseService.supabaseClient
+          .rpc("like_increment", params: {"count": 1, "row_id": threadId});
+    } else {
+      // * Delete like count in table
+      await SupabaseService.supabaseClient
+          .from("likes")
+          .delete()
+          .match({"user_id": userId, "thread_id": threadId});
+
+      // * Decrement like counter
+      await SupabaseService.supabaseClient
+          .rpc("like_decrement", params: {"count": 1, "row_id": threadId});
+    }
+  }
+
   @override
   void onClose() {
     textEditingController.dispose();
