@@ -82,7 +82,7 @@ class ThreadController extends GetxController {
       final response =
           await SupabaseService.supabaseClient.from("threads").select('''
     id, content, image, created_at, comment_count, like_count, user_id, 
-    user:user_id (email, metadata)
+    user:user_id (email, metadata), likes:likes (user_id, thread_id)
 ''').eq("id", threadId).single();
 
       fetchThreadLoading.value = false;
