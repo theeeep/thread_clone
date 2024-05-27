@@ -15,6 +15,7 @@ class ProfileController extends GetxController {
   var loading = false.obs;
   var postLoading = false.obs;
   var userLoading = false.obs;
+  var deleteLoading = false.obs;
   var commentLoading = false.obs;
   Rx<File?> image = Rx<File?>(null);
   RxList<PostModel> posts = RxList<PostModel>();
@@ -133,6 +134,44 @@ class ProfileController extends GetxController {
           for (var item in response) CommentModel.fromJson(item)
         ];
       }
+    } catch (e) {
+      commentLoading.value = false;
+      showSnackBar("Error", "Something went wrong!");
+    }
+  }
+
+  // * Delete Thread
+  Future<void> deleteThread(int threadId) async {
+    try {
+      deleteLoading.value = true;
+      await SupabaseService.supabaseClient
+          .from("threads")
+          .delete()
+          .eq("id", threadId);
+
+      deleteLoading.value = true;
+      posts.removeWhere((element) => element.id == threadId);
+      if (Get.isDialogOpen == true) Get.back();
+
+      showSnackBar("Success", "Thread Deleted!");
+    } catch (e) {
+      deleteLoading.value = false;
+      showSnackBar("Error", "Something went wrong!");
+    }
+  }
+
+  // * Delete Comments
+  Future<void> deleteComments(int commentId) async {
+    try {
+      commentLoading.value = true;
+      await SupabaseService.supabaseClient
+          .from("comments")
+          .delete()
+          .eq("id", commentId);
+
+      commentLoading.value = true;
+      comments.removeWhere((element) => element.id == commentId);
+      if (Get.isDialogOpen == true) Get.back();
     } catch (e) {
       commentLoading.value = false;
       showSnackBar("Error", "Something went wrong!");

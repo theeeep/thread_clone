@@ -1,21 +1,24 @@
 class UserModel {
+  String? id;
   String? email;
-  String? created_at;
+  String? createdAt;
   Metadata? metadata;
 
-  UserModel({this.email, this.metadata, this.created_at});
+  UserModel({this.email, this.metadata, this.createdAt, this.id});
 
   UserModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     email = json['email'];
-    created_at = json['created_at'];
+    createdAt = json['created_at'];
     metadata =
         json['metadata'] != null ? Metadata.fromJson(json['metadata']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
     data['email'] = email;
-    data['created_at'] = created_at;
+    data['created_at'] = createdAt;
     if (metadata != null) {
       data['metadata'] = metadata!.toJson();
     }

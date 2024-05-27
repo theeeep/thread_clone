@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thread_clone/core/themes/app_pallate.dart';
 import 'package:thread_clone/core/utils/helper.dart';
+import 'package:thread_clone/core/utils/type_def.dart';
 import 'package:thread_clone/features/home/model/post_model.dart';
 import 'package:thread_clone/features/home/widgets/post_bottom_bar.dart';
 import 'package:thread_clone/features/home/widgets/post_card_image.dart';
@@ -11,7 +12,14 @@ import 'package:thread_clone/routes/route_names.dart';
 
 class PostCard extends StatelessWidget {
   final PostModel post;
-  const PostCard({super.key, required this.post});
+  final bool isAuthCard;
+  final DeleteCallback? callback;
+  const PostCard({
+    super.key,
+    required this.post,
+    this.isAuthCard = false,
+    this.callback,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +47,11 @@ class PostCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      PostTopBar(post: post),
+                      PostTopBar(
+                        post: post,
+                        isAuthCard: isAuthCard,
+                        callback: callback,
+                      ),
                       Text(
                         formatDate(post.createdAt!),
                         style: const TextStyle(color: AppPallete.greyColor),

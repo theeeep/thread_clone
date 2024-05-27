@@ -154,6 +154,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           itemCount: profileController.posts.length,
                           itemBuilder: (context, index) => PostCard(
                             post: profileController.posts[index],
+                            isAuthCard: true,
+                            callback: profileController.deleteThread,
                           ),
                         )
                       else
