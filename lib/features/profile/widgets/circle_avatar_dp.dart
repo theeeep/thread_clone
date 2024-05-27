@@ -26,6 +26,7 @@ class CircleAvatarDp extends StatelessWidget {
         else
           CircleAvatar(
             radius: radius,
+            //TODO: Replace Image with new avatar
             backgroundImage: const AssetImage("assets/images/avatar.png"),
           ),
       ],

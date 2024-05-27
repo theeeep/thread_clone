@@ -6,7 +6,7 @@ class NottificationModel {
   String? notification;
   String? createdAt;
   String? userId;
-  User? user;
+  UserModel? user;
 
   NottificationModel(
       {this.id,
@@ -22,7 +22,7 @@ class NottificationModel {
     notification = json['notification'];
     createdAt = json['created_at'];
     userId = json['user_id'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {

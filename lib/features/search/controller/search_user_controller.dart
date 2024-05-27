@@ -7,7 +7,7 @@ import 'package:thread_clone/features/home/model/user_model.dart';
 class SearchUserController extends GetxController {
   var searchLoading = false.obs;
   var notFound = false.obs;
-  RxList<User> users = RxList<User>();
+  RxList<UserModel> users = RxList<UserModel>();
   Timer? _debounce;
 
   Future<void> searchUser(String name) async {
@@ -22,7 +22,7 @@ class SearchUserController extends GetxController {
             .ilike("metadata->>name", "%$name%");
         searchLoading.value = false;
         if (data.isNotEmpty) {
-          users.value = [for (var item in data) User.fromJson(item)];
+          users.value = [for (var item in data) UserModel.fromJson(item)];
         } else {
           notFound.value = true;
         }

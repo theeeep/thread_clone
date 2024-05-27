@@ -6,7 +6,7 @@ import 'package:thread_clone/features/profile/widgets/btn_style.dart';
 import 'package:thread_clone/features/profile/widgets/circle_avatar_dp.dart';
 
 class UserTile extends StatelessWidget {
-  final User user;
+  final UserModel user;
   const UserTile({super.key, required this.user});
 
   @override

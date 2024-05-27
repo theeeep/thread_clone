@@ -6,7 +6,7 @@ class CommentModel {
   int? threadId;
   String? reply;
   String? createdAt;
-  User? user;
+  UserModel? user;
 
   CommentModel(
       {this.id,
@@ -22,7 +22,7 @@ class CommentModel {
     threadId = json['thread_id'];
     reply = json['reply'];
     createdAt = json['created_at'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {

@@ -4,6 +4,8 @@ import 'package:thread_clone/features/auth/pages/signup_page.dart';
 import 'package:thread_clone/features/btmnavbar.dart';
 import 'package:thread_clone/features/comments/pages/add_comment.dart';
 import 'package:thread_clone/features/profile/page/edit_profile.dart';
+import 'package:thread_clone/features/profile/page/profile_page.dart';
+import 'package:thread_clone/features/profile/page/show_user.dart';
 import 'package:thread_clone/features/profile_setting/page/setting.dart';
 import 'package:thread_clone/features/threads/page/show_threads.dart';
 import 'package:thread_clone/features/threads/widgets/tap_to_show_image.dart';
@@ -29,6 +31,11 @@ class Routes {
       transition: Transition.fadeIn,
     ),
     GetPage(
+      name: RouteNames.showProfile,
+      page: () => const ProfilePage(),
+      transition: Transition.zoom,
+    ),
+    GetPage(
       name: RouteNames.editProfile,
       page: () => const EditProfile(),
       transition: Transition.leftToRight,
@@ -51,6 +58,11 @@ class Routes {
     GetPage(
       name: RouteNames.tapToShowImage,
       page: () => TapToShowImage(),
+      transition: Transition.zoom,
+    ),
+    GetPage(
+      name: RouteNames.showUser,
+      page: () => const ShowUser(),
       transition: Transition.zoom,
     ),
   ];

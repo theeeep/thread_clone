@@ -8,15 +8,18 @@ import 'package:thread_clone/core/services/supabase_service.dart';
 import 'package:thread_clone/core/utils/env.dart';
 import 'package:thread_clone/core/utils/helper.dart';
 import 'package:thread_clone/features/home/model/post_model.dart';
+import 'package:thread_clone/features/home/model/user_model.dart';
 import 'package:thread_clone/features/profile/model/comment_model.dart';
 
 class ProfileController extends GetxController {
   var loading = false.obs;
   var postLoading = false.obs;
+  var userLoading = false.obs;
   var commentLoading = false.obs;
   Rx<File?> image = Rx<File?>(null);
   RxList<PostModel> posts = RxList<PostModel>();
   RxList<CommentModel> comments = RxList<CommentModel>();
+  Rx<UserModel> user = Rx<UserModel>(UserModel());
 
   // * Update Profile Pic
   Future<void> updateProfile(String userId, String description) async {
@@ -65,6 +68,30 @@ class ProfileController extends GetxController {
   void pickImage() async {
     File? file = await pickImageFromGallery();
     if (file != null) image.value = file;
+  }
+
+  // * Fetch User
+  void fetchUserProfile(String userId) async {
+    try {
+      userLoading.value = true;
+
+      final response = await SupabaseService.supabaseClient
+          .from("users")
+          .select("*")
+          .eq("id", userId)
+          .single();
+
+      userLoading.value = false;
+      debugPrint("Fetch user threads Successfully: ${jsonEncode(response)}");
+      user.value = UserModel.fromJson(response);
+
+      // * Fetch user threads and replies
+      fetchUserThreads(userId);
+      fetchReplies(userId);
+    } catch (e) {
+      userLoading.value = false;
+      showSnackBar("Something Went Wrong", "Please Try Again!");
+    }
   }
 
   // * Fetch Post
