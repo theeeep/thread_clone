@@ -1,4 +1,4 @@
-# Threads Clone App
+# Threads Clone - Flutter App
 
 ## Overview
 
@@ -64,6 +64,19 @@ This project is a clone of the popular Threads app, built using Flutter for the 
 
 ### Preview
 
+![Screen Recording May 31](https://github.com/theeeep/thread_clone/assets/81185000/26998cb2-d9e8-4c41-8a54-1f2146480513)
+
+![Screenshot 2024-05-31 at 2 58 14 PM](https://github.com/theeeep/thread_clone/assets/81185000/6c48aac6-dc3a-4c2e-aa67-6cceeb1d135b)
+![Screenshot 2024-05-31 at 2 58 23 PM](https://github.com/theeeep/thread_clone/assets/81185000/1a097a2f-e576-498a-a87b-e4d4da4d596e)
+
+![Screenshot 2024-05-31 at 3 01 36 PM](https://github.com/theeeep/thread_clone/assets/81185000/776b9f44-3b29-4bd5-b4f5-d37842b4b02a)
+![Screenshot 2024-05-31 at 3 01 31 PM](https://github.com/theeeep/thread_clone/assets/81185000/71bdd482-07fe-4a57-966a-c28604bb4a3b)
+
+![Screenshot 2024-05-31 at 3 02 40 PM](https://github.com/theeeep/thread_clone/assets/81185000/13f076cc-ef5c-4e68-a704-cc022c7a47e8)
+![Screenshot 2024-05-31 at 3 02 53 PM](https://github.com/theeeep/thread_clone/assets/81185000/e69af6c1-ad73-4407-b41c-7a0e1306d891)
+
+## Project Structure
+
 ```
 .
 ├── README.md
@@ -84,8 +97,6 @@ This project is a clone of the popular Threads app, built using Flutter for the 
 │   └── widget_test.dart
 └── thread_clone.iml
 ```
-
-## Project Structure
 
 ## License
 
