@@ -77,7 +77,7 @@ This project is a clone of the popular Threads app, built using Flutter for the 
 
 ## Project Structure
 
-```
+``` bash
 .
 ├── README.md
 ├── analysis_options.yaml
